@@ -19,7 +19,7 @@ Always use technology to improve the world, if you are a black hat or gray hat h
 * [Solution](#solution)
 * [Materials](#materials)
 * [Connection Diagram](#connection-diagram)
-* [Wio Setup](#wio-setup)
+* [Kit Setup](#kit-setup)
 * [Wio Arduino Setup](#wio-arduino-setup)
 * [Soracom Platform Setup](#soracom-platform-setup)
 * [AWS IoT Setup](#aws-iot-setup)
@@ -31,7 +31,7 @@ Always use technology to improve the world, if you are a black hat or gray hat h
 
 ## Solution
 
-<img src="https://i.ibb.co/rtkSBcX/177088359.jpg" width="500">
+<img src="https://animais.culturamix.com/blog/wp-content/gallery/animal-de-estimacao-no-aviao-2/Animal-De-Estima%C3%A7%C3%A3o-No-Aviao-5.jpg" width="1000">
 
 I will make an integral IoT solution to monitor the pet’s environment based on RSL10-SENSE-DB-GEVK, in order to ensure their well-being throughout their journey. All this also integrated with a AWS as backend and NodeRed based platform which, in addition to showing the status of the package in real time, also sends notifications at the frequency that is convenient. 
 
@@ -60,11 +60,21 @@ Optional Hardware:
 
 ## Connection Diagram:
 
+ <img src="https://i.ibb.co/C2RZz5G/diagram.png" width="1000">
+
+## Kit Setup:
+
+Para la configuración correcta del kit, sera necesario descargar el IDE oficial de ON Semiconductor.
+
+IDE Link: https://www.onsemi.com/PowerSolutions/gatedDocument.do?method=getGatedDocument&docId=1172113
+
+El manual para configurar correctamente el IDE es el siguiente:
+
+Link: https://www.onsemi.com/pub/Collateral/EVBUM2614-D.PDF
+
+Todas las dependencias del programa están en la carpeta "Dependencies Pack", puedes descargarlas directamente desde la pagina de ON Semiconductor, pero recomiendo usar las que están en la carpeta.
 
 
-## Connection:
-
-The first step to realize this project is to create a brainium account and add your first device, all the images and instructions to configure our device were obtained from the official guide of Brainium. (https://brainium.blob.core.windows.net/public/docs/User%20manual%20Brainium%20Portal.pdf)
 
 1. Install and connect your environment:
 
