@@ -98,10 +98,7 @@ Android:https://play.google.com/store/apps/details?id=com.onsemi.rsl10senseandco
 
 - Si todo funciona bien, podremos ver los sensores obteniendo información.
 
-<img src="https://i.ibb.co/4jzYsKM/IMG-0070.png" width="200">
-<img src="https://i.ibb.co/ZHXdWcH/IMG-0069.png" width="200">
-<img src="https://i.ibb.co/R7pjLfM/IMG-0068.png" width="200">
-<img src="https://i.ibb.co/6Pn7C8k/IMG-0067.png" width="200">
+<img src="https://i.ibb.co/4jzYsKM/IMG-0070.png" width="200"><img src="https://i.ibb.co/ZHXdWcH/IMG-0069.png" width="200"><img src="https://i.ibb.co/R7pjLfM/IMG-0068.png" width="200"><img src="https://i.ibb.co/6Pn7C8k/IMG-0067.png" width="200">
 
 - Una de las principales dificultades para realizar la transmisión por MQTT correctamente, es saber a que Topic se esta mandando toda nuestra información, este Topic sera el mismo para todos los broker que configuremos, sin embargo para obtenerlo, deberemos realizar una pequeña prueba con algún Broker de MQTT que nos permita revisar todos los Topics, en el caso de AWS, no es posible hacer esto, asi que obtendremos el topic mediante un broker local de Mosquitto.
 
