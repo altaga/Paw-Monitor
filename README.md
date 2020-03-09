@@ -74,28 +74,266 @@ Link: https://www.onsemi.com/pub/Collateral/EVBUM2614-D.PDF
 
 Todas las dependencias del programa están en la carpeta "Dependencies Pack", puedes descargarlas directamente desde la pagina de ON Semiconductor, pero recomiendo usar las que están en la carpeta.
 
+Nota: Toda la configuración del kit esta perfectamente documentada en el documento, asi que este tutorial empezara desde la configuración de la aplicación movil para este proyecto.
 
-
-1. Install and connect your environment:
-
-1.1.Create a web account:
-
- - Go to https://www.brainium.com/portal and select ‘sign up’.
- - You will receive a key by e-mail, use it to validate your account creation.
+## App Setup - Part 1:
  
- <img src="https://i.ibb.co/gTVr5G2/sing.png" width="1000">
+- Install your gateway from this link:
+
+<img src="https://i.ibb.co/CHtGJZj/image.png" width="700">
+
+iOS:https://apps.apple.com/us/app/rsl10-sense-and-control/id1451974010
+
+<img src="https://i.ibb.co/q1c3S5h/image.png" width="700">
+
+Android:https://play.google.com/store/apps/details?id=com.onsemi.rsl10senseandcontrol&hl=es_VE
+
+- Selecciona el dispositivo que vas a configurar.
+
+<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
+
+- Seleccionamos los sensores a utilizar.
+
+<img src="https://i.ibb.co/0FRHJnc/IMG-0066.png" width="250">
+
+- Si todo funciona bien, podremos ver los sensores obteniendo información.
+
+<img src="https://i.ibb.co/4jzYsKM/IMG-0070.png" width="200">
+<img src="https://i.ibb.co/ZHXdWcH/IMG-0069.png" width="200">
+<img src="https://i.ibb.co/R7pjLfM/IMG-0068.png" width="200">
+<img src="https://i.ibb.co/6Pn7C8k/IMG-0067.png" width="200">
+
+- Una de las principales dificultades para realizar la transmisión por MQTT correctamente, es saber a que Topic se esta mandando toda nuestra información, este Topic sera el mismo para todos los broker que configuremos, sin embargo para obtenerlo, deberemos realizar una pequeña prueba con algún Broker de MQTT que nos permita revisar todos los Topics, en el caso de AWS, no es posible hacer esto, asi que obtendremos el topic mediante un broker local de Mosquitto.
+
+Link: https://mosquitto.org/download/
+
+- Para acceder al broker de mosquitto tendremos que configurar el broker en nuestra app.
+
+- Entra en el símbolo del engrane en la esquina superior derecha.
+
+<img src="https://i.ibb.co/80qj6nV/IMG-00902.png" width="200">
+
+- Presiona el switch "Enable Broadcast" y luego entra en la opción Manage Brokers.
+
+<img src="https://i.ibb.co/WFxJYyX/IMG-0071.png" width="200">
+
+- Presionamos el símbolo de + en la esquina superior derecha para agregar el broker.
+
+<img src="https://i.ibb.co/4dxwFWb/IMG-0072.png" width="200">
+
+- Configura las credenciales de la siguiente forma.
+
+  - Client Name: "Any Name"
+  - Protocol: tcp
+  - URL: IP From the server in your local network.
+  - Port Number: 1883
+  - Username: null
+  - Password: null
+
+<img src="https://i.ibb.co/jV86Lwk/IMG-0095.png" width="200">
+
+- Empieza el broadcast de los datos y en tu computadora ejecuta el siguiente comando en tu CMD or Terminal, para escuchar todos los topics de tu broker y por lo tanto el de tu device.
+
+Nota: aveces el broker de mosquitto no se activa de forma automática en windows, les agrego en la carpeta "Scripts" dos archivos .bat que permiten encender y apagar el broker al darles clic, ejecútenlos como administrador.
+
+Nota 2: En la mayoria de los brokers, el simbolo de # se usa como wildcard para los topics.
+
+    mosquitto_sub -v -t #
+
+- Tu topic se vera de la siguiente forma.
+
+<img src="https://i.ibb.co/1nqFHmS/topic.png" width="1000">
+
+Guarda ese topic ya que sera el topic de publicación en todos los brokers.
+
+## AWS Setup:
+
+AWS funciona a travez de roles, estos roles son credenciales que nosotros creamos para que los servicios se comuniquen entre si, para poder realizar toda nuestra integracion requerimos crear un role que permita la transmision efectiva de todos los servicios, por lo tanto eso sera lo primero a realizar.
+
+Nota: siempre empezar por aqui cuando realicemos algun proyecto con AWS.
+
+### IAM:
+
+- Entramos a la consola de IAM.
+
+<img src="https://i.ibb.co/CHBndXs/image.png" width="1000">
+
+- Entramos en la pestaña de roles y presionamos "Create role".
+
+<img src="https://i.ibb.co/1fm8rhr/image.png" width="1000">
+
+- Creamos un role enfocado en la plataforma IoT.
+
+<img src="https://i.ibb.co/42Vv4dY/image.png" width="1000">
+
+- Presionamos Next hasta el review.
+
+<img src="https://i.ibb.co/f22SfJ0/image.png" width="1000">
+
+- Ahora tenemos que agregarle los permisos adicionales al Role, en la pestaña de roles entra al role que acabamos de crear y presiona el boton de Attach policies.
+
+<img src="https://i.ibb.co/z5kVpXR/image.png" width="1000">
+
+- Dentro de las policies agrega los siguientes:
+
+  - AmazonDynamoDBFullAccess
+  - AWSIoTFullAccess
+  - AWSLambdaFullAccess
+  - AmazonSNSFullAccess 
+
+<img src="https://i.ibb.co/7r0KcNJ/image.png" width="1000">
+
+- Una vez terminado eso ahora si podemos empezar la configuración de la Rule dentro de AWS IoT Core.
+
+### DynamoDB
+
+En este caso la configuración de AWS IoT ya es proporcionada por la documentación oficial de ON semiconductor, sin embargo yo les mostrare como configurar las Rules para conectar el resto de servicios de AWS.
+
+Link: https://www.onsemi.com/pub/Collateral/AND9831-D.PDF
+
+- Una vez recibamos los datos a nuestro AWS IoT Core, configuraremos las Rules para conectar los siguientes servicios.
+
+<img src="https://i.ibb.co/zhzZXGh/Create.png" width="1000">
+
+- Le colocamos cualquier nombre a la rule.
+
+<img src="https://i.ibb.co/Rj05MW5/image.png" width="1000">
+
+- En el SQL Query colocaremos nuestro topic.
+
+<img src="https://i.ibb.co/R6Yqh0V/image.png" width="1000">
+
+- La primera rule que vamos a crear sera para guardar todos los datos en una DynamoDB.
+
+<img src="https://i.ibb.co/nRm3WNy/image.png" width="1000">
+
+- Presionamos "Create a new resource" para crear la tabla donde guardaremos los datos.
+
+<img src="https://i.ibb.co/Hn4TYS2/image.png" width="1000">
+
+- Para nuestra tabla usaremos los siguientes parámetros, sugiero que uses específicamente estos, ya que en nivel de producción todos los números de device serán diferentes y en la columna "Time" vamos a implementar una función especial de TIMESTAMP.
+
+<img src="https://i.ibb.co/ZWR8GcG/image.png" width="1000">
+
+- Una vez creado el recurso regresamos a 
+
+<img src="https://i.ibb.co/YtjVBjd/image.png" width="1000">
+
+La función especial en Sort Key value es:
+
+    ${parse_time("yyyy.MM.dd G 'at' HH:mm:ss z", timestamp() )}
+
+- Una vez este terminado eso, habremos terminado la primera rule, en este caso debido a que la rule para la lambda utiliza un SQL query diferente, ya no añaderemos mas acciones a esta rule.
+
+### Lambda:
+
+- Para crearemos una nueva rule pero utilizando el siguiente SQL Query.
+
+<img src="https://i.ibb.co/Np6R5GQ/image.png" width="1000">
+
+
+
+
+## App Setup - Part 2:
+
+Ya que tenemos los certificados para el device lo configuraremos de la siguiente forma.
+
+- Entra en el símbolo del engrane en la esquina superior derecha.
+
+<img src="https://i.ibb.co/80qj6nV/IMG-00902.png" width="200">
+
+- Presiona el switch "Enable Broadcast" y luego entra en la opción Manage Brokers.
+
+<img src="https://i.ibb.co/WFxJYyX/IMG-0071.png" width="200">
+
+- Presionamos el símbolo de + en la esquina superior derecha para agregar el broker.
+
+<img src="https://i.ibb.co/4dxwFWb/IMG-0072.png" width="200">
+
+- Set Client Name, Device ID, Protocol, URL and Port Number.
+
+  - Client Name: ANYNAME
+  - Device ID: ANYNAME
+  - Protocol: SSL
+  - URL: Your AWS Endpoint
+  - Port Number: 8883 (443 doesn't work)
+  - Username and Password: Empty
+
+<img src="https://i.ibb.co/55nJRcM/IMG-0073.png" width="200">
+
+-  Import all the certificates (CA certificate inside "Cert" folder)
+
+    - CA Certificate
+
+    <img src="https://i.ibb.co/MfNQbCM/IMG-0074.png" width="200">
+
+    - Thing Certificate
+
+    <img src="https://i.ibb.co/mhQC9YB/IMG-0075.png" width="200">
+
+    - Private Key Certificate
+
+    <img src="https://i.ibb.co/pzhZx9K/IMG-0077.png" width="200">
+
+    - Password Empty
+
+    <img src="https://i.ibb.co/4gWLrNw/IMG-0078.png" width="200">
+
+- Presiona "Save" en la esquina superior derecha para completar la configuración.
  
-1.2.Install your gateway:
+- Para empezar el broadcast hacia AWS presiona en la aplicación el siguiente botón.
 
-https://play.google.com/store/apps/details?id=com.brainium.android.gateway&hl=es_MX
+<img src="https://i.ibb.co/GpWvN9m/IMG-0091.png" width="200">
 
-You can use an iOS, Android (phone or tablet), or a Linux Raspberry PI to act as a Gateway
-for your Brainium solution and connect your SmartEdge Agile device to Brainium Cloud.
 
-For iOS and Android gateway you need to install Brainium Gateway mobile app. There are
-two ways to get Brainium gateway mobile application:
 
-1) Scan QR code located on the Agile device packaging. You will be redirected to the
+
+
+Los valores en la base de datos se veran asi.
+
+https://i.ibb.co/kB711xp/image.png
+
+1.3. Selecciona el dispositivo que vas a configurar.
+
+<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
+
+1.3. Selecciona el dispositivo que vas a configurar.
+
+<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
+
+1.3. Selecciona el dispositivo que vas a configurar.
+
+<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
+
+1.3. Selecciona el dispositivo que vas a configurar.
+
+<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
+
+1.3. Selecciona el dispositivo que vas a configurar.
+
+<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
+
+1.3. Selecciona el dispositivo que vas a configurar.
+
+<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
+
+1.3. Selecciona el dispositivo que vas a configurar.
+
+<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
+
+
+
+
+
+
+
+
+
+
+
+
+
+ou will be redirected to the
 needed mobile app download page. If redirect brings you to www.brainium.com/apps,
 tap on “Get it” button for iOS or Android.
 
