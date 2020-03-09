@@ -174,12 +174,9 @@ Nota: siempre empezar por aqui cuando realicemos algun proyecto con AWS.
 
 <img src="https://i.ibb.co/z5kVpXR/image.png" width="1000">
 
-- Dentro de las policies agrega los siguientes:
+- Dentro de las policies agrega el siguiente:
 
   - AmazonDynamoDBFullAccess
-  - AWSIoTFullAccess
-  - AWSLambdaFullAccess
-  - AmazonSNSFullAccess 
 
 <img src="https://i.ibb.co/7r0KcNJ/image.png" width="1000">
 
@@ -231,10 +228,153 @@ La función especial en Sort Key value es:
 
 <img src="https://i.ibb.co/Np6R5GQ/image.png" width="1000">
 
+- Añadiremos a esta rule la siguiente acción:
+
+<img src="https://i.ibb.co/n3H5576/image.png" width="1000">
+
+- Presionamos el botón de "Create a new Lambda Function":
+
+<img src="https://i.ibb.co/5sLHqy2/image.png" width="1000">
+
+- Configuramos la lambda de la siguiente forma y la creamos:
+
+<img src="https://i.ibb.co/68j2BXJ/image.png" width="1000">
+
+- Una vez creada la lambda bajamos a la seccion de Execution role y presionamos el boton View the YOURROLE on the IAM console para poder agregar la police de SNS para los SMS:
+
+<img src="https://i.ibb.co/K9QRFc4/image.png" width="1000">
+
+- Agreamos el servicio de SNS   
+    - AmazonSNSFullAccess 
+
+<img src="https://i.ibb.co/xJV8jxX/image.png" width="1000">
+
+- Una ves terminado eso, seleccionamos la lambda en nuestra rule para terminar de configurar el trigger de la lambda.
+
+<img src="https://i.ibb.co/zh8Fq0C/image.png" width="1000">
+
+- Antes de programar la Lambda tendremos que configurar el servicio de SMS a traves de SNS.
+
+<img src="https://i.ibb.co/RbjHG8c/image.png" width="1000">
+
+- Presionamos el boton de "Create Topic" para crear nuestro servicio de mensajes.
+
+<img src="https://i.ibb.co/fNhCPfh/image.png" width="1000">
+
+- Ponerle titulo al Topic y crearlo.
+
+<img src="https://i.ibb.co/YDZXHC5/image.png" width="1000">
+
+- Guarda el numero de ARN, ya que lo vamos a necesitar para configurar la lambda.
+
+<img src="https://i.ibb.co/NpBxLj1/image.png" width="1000">
+
+- Presionamos el botón de "Create subscription".
+
+<img src="https://i.ibb.co/bvdLmBW/image.png" width="1000">
+
+- Seleccionamos como "Protocol" SMS y en Endpoint pon tu numero de celular (Marcacion internacional).
+
+<img src="https://i.ibb.co/Kw1F5SW/image.png" width="1000">
+
+- Listo hemos terminado de crear los servicios necesarios para utilizar la lambda correctamente, ahora regresamos a la lambda y copia el código en la carpeta Lambda Code y pegalo en tu Lambda.
+
+<img src="https://i.ibb.co/FztvcY8/image.png" width="1000">
+
+- La parte mas importante del coodigo son los Thresholds, cada uno de ellos se obtuvo de las siguientes referencias.
+
+- Air Quality: RSL10 Reference.
+- Max Accel Limit: https://web.archive.org/web/20170104164718/http://www.au.af.mil/au/aupress/digital/pdf/book/b_0113_brulle_engineering_space_age.pdf
+- Max Pressure on Flight: https://www.who.int/ith/mode_of_travel/cab/en/
+- Max Degrees: 45 degrees maximum static friction before the dog slips
+- Max Magnetic Field: https://www.who.int/peh-emf/publications/facts/fs322/en/
+- Min and Max, Temperature and Humidity: http://www.dartmouth.edu/~cushman/courses/engs44/comfort.pdf
+- Max Lux Level: https://www.engineeringtoolbox.com/light-level-rooms-d_708.html
+
+## IoT Things:
+
+Ya que tenemos todo nuestra plataforma lista, tenemos que crear los accesos para comunicarnos con ella, asi que tendremos que crear 2 Things en este caso, la primera se para nuestro modulo de RSL10 y la otra sera para la UI de NodeRed.
+
+Nota: Para configurar la app, puedes usar el siguiente manual oficial de ON Semiconductor también.
+
+Link: https://www.onsemi.com/pub/Collateral/AND9831-D.PDF
+
+- First we have ti access our AWS console y look for the IoT core service:
+
+<img src="https://i.ibb.co/KVbtQLR/image.png" width="600">
+
+- Obtain your AWS endpoint, save it because we will use it to setup the RSL10 App and the webpage.
+
+<img src="https://i.ibb.co/ZYwrdfR/image.png" width="600">
+
+- In the lateral panel select the "Onboard" option and then "Get started".
+
+<img src="https://i.ibb.co/gmKxc7P/image.png" width="600">
+
+- Select "Get started".
+
+<img src="https://i.ibb.co/XSxSxbF/image.png" width="600">
+
+- In "Choose a platform" select "Linux/OSX", in AWS IoT DEvice SDK select "Python" and then click "Next".
+
+<img src="https://i.ibb.co/JR69Fdd/image.png" width="600">
+
+- In Name write any name,remember this process you will do it twice, so name things so that you can differentiate the credentials that you will put in NodeRed and in the RSL10 app, you'd like and then click on "Next step".
+
+<img src="https://i.ibb.co/NNLqqM0/image.png" width="600">
+
+- In the section, "Download connection kit for" press the button "Linux/OSX" to download the credential package (which we will use later) and click on "Next Step".
+
+<img src="https://i.ibb.co/RHVTRpg/image.png" width="600">
+
+- Click "Done".
+
+<img src="https://i.ibb.co/N9c8jbG/image.png" width="600">
+
+- Click "Done".
+
+<img src="https://i.ibb.co/DtBxq0k/image.png" width="600">
+
+- In the lateral bar, inside the Manage/Things section we can see our thing already created. Now we have to set up the policy of that thing for it to work without restrictions in AWS.
+
+<img src="https://i.ibb.co/dQTFLZY/image.png" width="600">
+
+- In the lateral bar, in the Secure/Policies section we can see our thing-policy, click on it to modify it:
+
+<img src="https://i.ibb.co/jThNgtc/image.png" width="600">
+
+- Click on "Edit policy document".
+
+<img src="https://i.ibb.co/gV0tMtf/image.png" width="600">
+
+Copy-paste the following text in the document and save it.
+
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+        "Effect": "Allow",
+        "Action": "iot:*",
+        "Resource": "*"
+        }
+    ]
+    }
+
+<img src="https://i.ibb.co/ydtTqB2/image.png" width="600">
+
+- Once this is done, we will go to our pc and to the folder with the credentials previously downloaded and extract them.
+
+<img src="https://i.ibb.co/mFKPxcY/image.png" width="600">
 
 
 
 ## App Setup - Part 2:
+
+Android: si estas configurando AWS en un Android, pasa mediante USB los certificados para que puedas configurarlos fácilmente.
+
+iPhone: si estas configurando AWS en un iPhone, lo mas sencillo es poner los certificados desde https://www.icloud.com/# en la aplicación de "iCloud Drive".
+
+<img src="https://i.ibb.co/CJg26xW/image.png" width="1000">
 
 Ya que tenemos los certificados para el device lo configuraremos de la siguiente forma.
 

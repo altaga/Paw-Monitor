@@ -41,7 +41,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "Excessive brightness",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -54,7 +54,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "Very low air quality",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -70,7 +70,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "Excessive movement detected",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -86,7 +86,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "Strange position detected",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -102,7 +102,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "High magnetic field detected.",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -116,7 +116,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "High Temperature Detected",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -125,7 +125,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "Low Temperature Detected",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -139,7 +139,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "High Pressure Detected",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -148,7 +148,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "Low Pressure Detected",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -161,7 +161,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "High Humidity Detected",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
@@ -170,7 +170,7 @@
          var sns = new AWS.SNS();
          var params = {
          Message: "Low Humidity Detected",
-         TopicArn: "arn:aws:sns:us-east-1:312945189004:Noti"
+         TopicArn: "arn:aws:sns:us-east-1:xxxxxxxxxxxxx:YOURTOPIC"
          };
          sns.publish(params, context.done);
       }
