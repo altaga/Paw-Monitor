@@ -1,6 +1,6 @@
 # Paw-ON
 
-<img src="foto de LOGO" width="600">
+<img src="https://i.ibb.co/1sMns5D/Logo.png" width="600">
 
 ## Introduction
 
@@ -63,6 +63,20 @@ Optional Hardware:
  <img src="https://i.ibb.co/C2RZz5G/diagram.png" width="1000">
 
 ## Kit Setup:
+
+- Kit Assembly:
+
+<img src="https://i.ibb.co/SrPz6NK/20200310-000100.jpg" width="1000">
+
+- Connect the Antenna.
+
+<img src="https://i.ibb.co/zhhnxW9/20200310-000117.jpg" width="1000">
+
+- Put the battery in the socket.
+
+<img src="https://i.ibb.co/Kw0VTcS/20200310-000131.jpg" width="1000">
+
+- Perfect, your kit is assembled and ready to program!
 
 Para la configuración correcta del kit, sera necesario descargar el IDE oficial de ON Semiconductor.
 
