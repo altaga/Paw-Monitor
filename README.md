@@ -434,39 +434,60 @@ AWS IoT.
 
 ## Node-Red Setup:
 
-Node Red is a tool for NodeJS where we can integrate services easily, without code and, of course, create excellent dashboards.
+- Node Red is a tool for NodeJS where we can integrate services easily, without code and, of course, create excellent dashboards.
 
-NodeJS installation guide: https://www.guru99.com/download-install-node-js.html
+- NodeJS installation guide: https://www.guru99.com/download-install-node-js.html
 
-NodeRED installation guide: https://nodered.org/docs/getting-started/windows
+- NodeRED installation guide: https://nodered.org/docs/getting-started/windows
 
-NodeRED installation guide: https://flows.nodered.org/node/node-red-dashboard
+- NodeRED installation guide: https://flows.nodered.org/node/node-red-dashboard
 
-The file "flows.json" in the folder "Node-RED Flow", has all the information to import the flow into your NodeRED.
+- The file "flows.json" in the folder "Node-RED Flow", has all the information to import the flow into your NodeRED.
 
 <img src = "https://i.ibb.co/c11ZJT8/image.png" width = "400">
 <img src = "https://i.ibb.co/nBL3M23/image.png" width = "400">
 
-Once that is done we will edit the MQTT node to enter our credentials.
+- Once that is done we will edit the MQTT node to enter our credentials.
 
-<img src = "https://i.ibb.co/58BpP35/image.png" width = "600">
+<img src = "https://i.ibb.co/B3qT5vm/image.png" width = "600">
 
-Set Server and Port.
+- Set Server and Port.
 
-<img src = "https://i.ibb.co/wdzbztp/image.png" width = "600">
+<img src = "https://i.ibb.co/WHrcHCd/image.png" width = "600">
 
-Set User and Password.
+- Press in the pencil in TSL configuration to add the certificates.
 
-<img src = "https://i.ibb.co/cDjySLr/image.png" width = "600">
+- Note: RootCA certificate inside "Certs" folder.
 
-If everything works fine press the "Deploy" button and enter the following URL to check the Dashboard.
+<img src = "https://i.ibb.co/nMgtkRN/image.png" width = "600">
+
+- If everything works fine press the "Deploy" button and enter the following URL to check the Dashboard.
 
 http://localhost:1880/ui
 
-<img src = "https://i.ibb.co/Cs3v3Gr/image.png" width = "800">
+<img src = "https://i.ibb.co/bzWytff/image.png" width = "800">
 
+- El mapa de la localización en tiempo real del device es:
 
+http://localhost:1880/worldmap/
 
+<img src = "https://i.ibb.co/ydhWQVs/image.png" width = "800">
+
+### Blocks Explanation:
+
+- Este bloque realiza la función de actualizar cada 10 segundos la ubicación en el mapa, la ubicación la obtiene al llamar una API de localización gratuita, procesando con una función (escrita en Javascript) y mandándola al nodo de mapa.
+
+Nota: también mandamos la ubicación a AWS IoT para poder realizar aviso en su debido caso si la ubicación del animal cambia de forma repentina.
+
+<img src = "https://i.ibb.co/58dhD0n/image.png" width = "800">
+
+- Este bloque recibe cada uno de los payloads de el broker, filtra según el sensor a que gráfica tiene que ir y lo manda a gráficar.
+
+<img src = "https://i.ibb.co/YLzYM9F/image.png" width = "800">
+
+- Este bloque es uno de los mas interesantes ya que su funcion es espera a que el dato de temperatura y humedad lleguen para poder hacer el calculo del Dew Point, que es uno de los estándares para la medición del confort en el ambiente.
+
+<img src = "https://i.ibb.co/6v4RVJN/image.png" width = "800">
 
 
 
@@ -498,169 +519,6 @@ http://localhost:1880/ui
 1.3. Selecciona el dispositivo que vas a configurar.
 
 <img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
-
-
-
-
-
-
-
-
-
-
-
-
-
-ou will be redirected to the
-needed mobile app download page. If redirect brings you to www.brainium.com/apps,
-tap on “Get it” button for iOS or Android.
-
-2) Open the Equipment page on Brainium and click on “Get it” button for iOS or Android
-to be redirected to the mobile app download page.
-
-For Linux gateway, open the Equipment page on Brainium and click the “Get it” button for
-Linux gateway. You will be redirected to www.brainium.com/apps/linux containing all the
-instructions to download and install the Linux gateway application.
-
-Install Brainium iOS, Android, or Linux gateway; then enter the gateway application with the
-same credentials you used when registering on the web portal. Then your gateway will
-appear in the web app list of gateways (Equipment → Gateways).
-
-1.3.Pair Agile device:
-
-Turn on your Agile device by pressing the button for more than 2 seconds. When device is
-turned on, it will start blinking with blue light.
-
-Note: If you turn on the device while being in charge, you will see one LED in red for charge
-indication and one LED blinking blue at the same time. For detailed description of Agile
-device light indication and button behavior see Know your Agile device section below.
-
-Ensure that Brainium Gateway is always visible on your mobile, no screen lock (for iOS app
-as it will not work in background). Ensure the Brainium Gateway is connected to the cloud.
-
-Go to Brainium portal ‘Equipment’ page. You will see your gateway ID and gateway name.
-The name can be changed as needed while ID always remains the same.
-
-Press ‘+’ to connect the Agile device.
-
- <img src="https://i.ibb.co/j56Zdy2/bbbbm.png" width="1000">
-
-You will be asked to accept the terms of Brainium discovery period. After that, each device
-you add to the portal for the first time will have the following limits:
-
-- up to 180 days of usage,
-- up to 15GB of re-usable cloud storage,
-- up to 2GB of telemetry tracking traffic.
-
-Select your device in a list and click on “Connect” (Connection will be established in 20-30
-seconds).
-
-<img src="https://i.ibb.co/Ybcx6Nh/device1.png" width="1000">
-
-Now you can rename your Agile device, view it in the list of devices and add it to your
-project.
-
-1.4.Firmware update:
-
-Brainium Portal allows user to keep his device updated and push a new firmware for all the
-users by using “Firmware Over the Air” update functionality.
-
-You can get 2 types of updates: mandatory (the user will see a notification right after the
-pairing and update will start automatically without user approval) and non-mandatory (the
-user has possibility to choose whether/when she/he wants to update the device or not).
-
-Go to Equipment → Device to check if any new FW is available. You can see a notification
-on the page header also. 
-
-The update will start when click the icon . The icon will change its state showing an update
-progress:
-
-After the firmware downloading, the icon will change its state again notifying the user about
-device rebooting:
-
-Important note: when firmware rebooting process is started don’t turn off the device and
-gateway till the completion of the firmware update.
-
-When updating process is finished you will get a notification message. Update icon will
-disappear until a new firmware version is available. 
-
-## Train:
-
-  - We created a new workspace.
-  
-<img src="https://i.ibb.co/9rGSVnX/WS1.png" width="1000">
-
-  - We give the project a name.
-  
-  <img src="https://i.ibb.co/cCvszMs/WS2.png" width="1000">
-
-  - We select the device that will obtain the patterns of the machine.
-  
-  <img src="https://i.ibb.co/nfK3wCQ/WS3.png" width="1000">
-
-  - In our case we connect the machine to our bridge simulator, as you can see in the following video to detect oscilation patterns.
-
-[![SGD](https://img.interempresas.net/fotos/1843350.jpeg)](https://youtu.be/cFr_DeH4-iQ)
-
-Sorry github does not allow embed videos.
-
-- Once we have a large sample of patterns, we rename the patterns that are relevant to our model and we create the model.
-
-<img src="https://i.ibb.co/qr4hqsf/Capture11.png" width="1000">
-
-The patterns we recorded were the following, the most important for us and our notification that predictive maintenance is required is Max Vibration S:
-
-- S1: Static State.
-- Med Vibration S.
-- S2: Static State.
-- Max Vibration S.
-- S3: Static State.
-
-- Once the model is created, we go to the projects tab and create a new one.
-
-<img src="https://i.ibb.co/Wyz3VrH/tab.png" width="1000">
-
-- We assign to our project the BBBM device.
-
-<img src="https://i.ibb.co/1Xb4kCB/bbbbbbbm.png" width="1000">
-
-# IFTTT:
-
-- First we need to create an account in IFTTT, fortunately Brainium has an integration with this platform for integration of services.
-
-<img src="https://i.ibb.co/Bf9cYLg/Capture1.png" width="1000">
-
-- We search for "Brainium" in the search bar.
-
-<img src="https://i.ibb.co/tDLgCLW/Capture2.png" width="1000">
-
-- We enter any of the applets and press on the author Brainium.
-
-<img src="https://i.ibb.co/KbR8SJ8/Capture3.png" width="1000">
-
-- We select "Connect" to make the connection with the Brainium platform.
-
-<img src="https://i.ibb.co/SxMmKXB/Capture45.png" width="1000">
-
-- We put our credentials to connect.
-
-<img src = "https://i.ibb.co/LJ5R4MH/Capture55.png" width = "1000">
-
-- We allow the access.
-
-<img src = "https://i.ibb.co/6rg7qqx/Capture56.png" width = "1000">
-
-- We selected the Applet "Get all Brainium alerts on your device".
-
-<img src = "https://i.ibb.co/y42CbmL/Capture57.png" width = "1000">
-
-- Turn ON and thats all!
-
-<img src = "https://i.ibb.co/sJ23cFV/Capture58.png" width = "1000">
-
-- To finish this, we need to install the IFTTT app on your device.
-
-https://play.google.com/store/apps/details?id=com.ifttt.ifttt&hl=es_MX
 
 ## Demo:
 
