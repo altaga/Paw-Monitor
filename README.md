@@ -489,37 +489,6 @@ Nota: también mandamos la ubicación a AWS IoT para poder realizar aviso en su 
 
 <img src = "https://i.ibb.co/6v4RVJN/image.png" width = "800">
 
-
-
-
-1.3. Selecciona el dispositivo que vas a configurar.
-
-<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
-
-1.3. Selecciona el dispositivo que vas a configurar.
-
-<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
-
-1.3. Selecciona el dispositivo que vas a configurar.
-
-<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
-
-1.3. Selecciona el dispositivo que vas a configurar.
-
-<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
-
-1.3. Selecciona el dispositivo que vas a configurar.
-
-<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
-
-1.3. Selecciona el dispositivo que vas a configurar.
-
-<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
-
-1.3. Selecciona el dispositivo que vas a configurar.
-
-<img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
-
 ## Demo:
 
 In this video we will present the demo of our product and also we will show you the search for the best AI to do it, please enjoy it.
