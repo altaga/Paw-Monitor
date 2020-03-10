@@ -363,8 +363,6 @@ Copy-paste the following text in the document and save it.
 
 <img src="https://i.ibb.co/mFKPxcY/image.png" width="600">
 
-
-
 ## App Setup - Part 2:
 
 Android: si estas configurando AWS en un Android, pasa mediante USB los certificados para que puedas configurarlos fácilmente.
@@ -422,13 +420,56 @@ Ya que tenemos los certificados para el device lo configuraremos de la siguiente
 
 <img src="https://i.ibb.co/GpWvN9m/IMG-0091.png" width="200">
 
+- Si todo sale bien, deberemos ver en AWS IoT y DynamoDB lo Siguiente.
+
+DynamoDB.
+
+ <img src="https://i.ibb.co/kB711xp/image.png" width="1000">
+
+AWS IoT.
+
+ <img src="https://i.ibb.co/xC7M9cX/image.png" width="1000">
+
+- Ya con esto, tenemos todo el backend en cloud del proyecto, por lo tanto ahora nos podemos concentrar en el frontend.
+
+## Node-Red Setup:
+
+Node Red is a tool for NodeJS where we can integrate services easily, without code and, of course, create excellent dashboards.
+
+NodeJS installation guide: https://www.guru99.com/download-install-node-js.html
+
+NodeRED installation guide: https://nodered.org/docs/getting-started/windows
+
+NodeRED installation guide: https://flows.nodered.org/node/node-red-dashboard
+
+The file "flows.json" in the folder "Node-RED Flow", has all the information to import the flow into your NodeRED.
+
+<img src = "https://i.ibb.co/c11ZJT8/image.png" width = "400">
+<img src = "https://i.ibb.co/nBL3M23/image.png" width = "400">
+
+Once that is done we will edit the MQTT node to enter our credentials.
+
+<img src = "https://i.ibb.co/58BpP35/image.png" width = "600">
+
+Set Server and Port.
+
+<img src = "https://i.ibb.co/wdzbztp/image.png" width = "600">
+
+Set User and Password.
+
+<img src = "https://i.ibb.co/cDjySLr/image.png" width = "600">
+
+If everything works fine press the "Deploy" button and enter the following URL to check the Dashboard.
+
+http://localhost:1880/ui
+
+<img src = "https://i.ibb.co/Cs3v3Gr/image.png" width = "800">
 
 
 
 
-Los valores en la base de datos se veran asi.
 
-https://i.ibb.co/kB711xp/image.png
+
 
 1.3. Selecciona el dispositivo que vas a configurar.
 
