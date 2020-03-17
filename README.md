@@ -20,14 +20,12 @@ Always use technology to improve the world, if you are a black hat or gray hat h
 * [Materials](#materials)
 * [Connection Diagram](#connection-diagram)
 * [Kit Setup](#kit-setup)
-* [Wio Arduino Setup](#wio-arduino-setup)
-* [Soracom Platform Setup](#soracom-platform-setup)
-* [AWS IoT Setup](#aws-iot-setup)
-* [AWS Lambda Setup](#aws-lambda-setup)
-* [AWS SNS Setup](#aws-sns-setup)
-* [AWS DynamoDB Setup](#aws-dynamodb-setup)
-* [WEB Interface Setup](#web-interface-setup)
-* [The Final Product](#the-final-product)
+* [App Setup - Part 1](#app-setup---part-1)
+* [AWS Setup](#aws-setup)
+* [App Setup - Part 2](app-setup---part-2)
+* [Node-Red Setup](#node-red-setup)
+* [Product](#product)
+* [Demo](#demo)
 
 ## Solution
 
@@ -503,13 +501,25 @@ Nota: también mandamos la ubicación a AWS IoT para poder realizar aviso en su 
 
 <img src = "https://i.ibb.co/6v4RVJN/image.png" width = "800">
 
+## Product:
+
+<img src = "https://i.ibb.co/C2gvKSt/20200317-162807.jpg" width = "800">
+<img src = "https://i.ibb.co/D9pkHvT/20200317-162814.jpg" width = "800">
+<img src = "https://i.ibb.co/KLQhnwT/20200317-162827.jpg" width = "800">
+
+ My dog with the device:
+
+<img src = "https://i.ibb.co/pzGYpC1/20200314-142539.jpg" width = "800">
+<img src = "https://i.ibb.co/qNgpSBT/20200314-142545.jpg" width = "800">
+<img src = "https://i.ibb.co/YQYgSQc/vlcsnap-2020-03-17-15h51m27s441.png" width = "800">
+
 ## Demo:
 
-In this video we will present the demo of our product and also we will show you the search for the best AI to do it, please enjoy it.
+This my EPIC DEMO:
 
 Video: Click on the image:
 
-[![BBBM](https://i.ibb.co/zF0d7FV/BBBM.png)](https://youtu.be/IpRtHPIniXw)
+[![Demo](https://i.ibb.co/9pPY2Tm/vlcsnap-2020-03-17-15h51m12s755.png)](https://youtu.be/IpRtHPIniXw)
 
 Sorry github does not allow embed videos.
 
