@@ -503,12 +503,16 @@ Nota: también mandamos la ubicación a AWS IoT para poder realizar aviso en su 
 
 ## Product:
 
-<img src = "https://i.ibb.co/YR2KR84/vlcsnap-2020-03-17-16h43m47s334.png" width = "800">
+
 <img src = "https://i.ibb.co/C2gvKSt/20200317-162807.jpg" width = "800">
 <img src = "https://i.ibb.co/D9pkHvT/20200317-162814.jpg" width = "800">
 <img src = "https://i.ibb.co/KLQhnwT/20200317-162827.jpg" width = "800">
 
- My dog with the device:
+Travel dog crate with the device:
+
+<img src = "https://i.ibb.co/YR2KR84/vlcsnap-2020-03-17-16h43m47s334.png" width = "800">
+
+My dog with the device:
 
 <img src = "https://i.ibb.co/f0fMGnW/vlcsnap-2020-03-17-15h51m27s441.png" width = "800">
 <img src = "https://i.ibb.co/26t19qz/20200314-142545.jpg" width = "800">
