@@ -2,7 +2,7 @@
 
 <img src="https://i.ibb.co/1sMns5D/Logo.png" width="600">
 
-## Introduction
+# Introduction
 
 If you have a dog, cat or any pet that needs to go into a kennel when travelling, and be left in the hands of airlines services, you know how stressful and problematic it is for your precious friends. 
 
@@ -10,7 +10,13 @@ The main problem thus is: The horrid care pets get when they are transported in 
 
 <img src="https://i.ibb.co/zhMTTGJ/perro.png" width="600">
 
+B2B Market:
+
 Sometimes we need to send pets with an airline service for travel to another country. How can we be sure they're fine at all times? Take into consideration how baggage is treated.
+
+B2C Market:
+
+Acaso alguna vez no hemos temido que nuestro perro se extravie y no puedas encontrarlo nunca mas, considerariamos tener una solucion para que tu perro nunca pueda perderse.
 
 Always use technology to improve the world, if you are a black hat or gray hat hacker please abstain at this point ......... or at least leave your star to make me feel less guilty XP.
 
@@ -22,20 +28,30 @@ Always use technology to improve the world, if you are a black hat or gray hat h
 * [Kit Setup](#kit-setup)
 * [App Setup - Part 1](#app-setup---part-1)
 * [AWS Setup](#aws-setup)
-* [App Setup - Part 2](app-setup---part-2)
+* [App Setup - Part 2](#app-setup---part-2)
 * [Node-Red Setup](#node-red-setup)
+* [NFC Setup](#nfc-setup)
 * [Product](#product)
 * [Demo](#demo)
 
-## Solution
+# Solution
 
 <img src="https://animais.culturamix.com/blog/wp-content/gallery/animal-de-estimacao-no-aviao-2/Animal-De-Estima%C3%A7%C3%A3o-No-Aviao-5.jpg" width="1000">
+
+B2B Market:
 
 I will make an integral IoT solution to monitor the pet’s environment based on RSL10-SENSE-DB-GEVK, in order to ensure their well-being throughout their journey. All this also integrated with a AWS as backend and NodeRed based platform which, in addition to showing the status of the package in real time, also sends notifications at the frequency that is convenient. 
 
 The current monitoring solutions are restricted to only lifeless packages, this making the continuous monitoring of pets a novelty. It is useful because thanks to this system pet owners can be 100% sure that their pets will be well and can monitor and follow them throughout their flight or any travel.
 
-## Materials:
+B2C Market:
+
+La tecnologia NFC ha sido usada por muchos años en productos, animales y hasta humanos, sin embargo no tenemos una solucion que nos indique si el perro ya fue encontrado una vez se ha escaneado el tag.
+
+Crearemos una configuración del tag de NFC de forma que el perro una vez se le revisen los datos del tag, este nos notifique en donde esta y ademas le muestre a la persona que escaneo el tag la información de contacto para poder recuperar a nuestro mejor amigo.
+
+
+# Materials:
 
 List the hardware and software you will use to build this.
 
@@ -56,11 +72,11 @@ Optional Hardware:
 
 - Tablet as UI.
 
-## Connection Diagram:
+# Connection Diagram:
 
  <img src="https://i.ibb.co/C2RZz5G/diagram.png" width="1000">
 
-## Kit Setup:
+# Kit Setup:
 
 - Kit Assembly:
 
@@ -88,7 +104,7 @@ Todas las dependencias del programa están en la carpeta "Dependencies Pack", pu
 
 Nota: Toda la configuración del kit esta perfectamente documentada en el documento, asi que este tutorial empezara desde la configuración de la aplicación movil para este proyecto.
 
-## App Setup - Part 1:
+# App Setup - Part 1:
  
 - Install your gateway from this link:
 
@@ -155,13 +171,13 @@ Nota 2: En la mayoria de los brokers, el simbolo de # se usa como wildcard para 
 
 Guarda ese topic ya que sera el topic de publicación en todos los brokers.
 
-## AWS Setup:
+# AWS Setup:
 
 AWS funciona a travez de roles, estos roles son credenciales que nosotros creamos para que los servicios se comuniquen entre si, para poder realizar toda nuestra integracion requerimos crear un role que permita la transmision efectiva de todos los servicios, por lo tanto eso sera lo primero a realizar.
 
 Nota: siempre empezar por aqui cuando realicemos algun proyecto con AWS.
 
-### IAM:
+## IAM:
 
 - Entramos a la consola de IAM.
 
@@ -191,7 +207,7 @@ Nota: siempre empezar por aqui cuando realicemos algun proyecto con AWS.
 
 - Una vez terminado eso ahora si podemos empezar la configuración de la Rule dentro de AWS IoT Core.
 
-### DynamoDB
+## DynamoDB
 
 En este caso la configuración de AWS IoT ya es proporcionada por la documentación oficial de ON semiconductor, sin embargo yo les mostrare como configurar las Rules para conectar el resto de servicios de AWS.
 
@@ -231,7 +247,7 @@ La función especial en Sort Key value es:
 
 - Una vez este terminado eso, habremos terminado la primera rule, en este caso debido a que la rule para la lambda utiliza un SQL query diferente, ya no añaderemos mas acciones a esta rule.
 
-### Lambda:
+## Lambda:
 
 - Para crearemos una nueva rule pero utilizando el siguiente SQL Query.
 
@@ -300,7 +316,7 @@ La función especial en Sort Key value es:
 - Min and Max, Temperature and Humidity: http://www.dartmouth.edu/~cushman/courses/engs44/comfort.pdf
 - Max Lux Level: https://www.engineeringtoolbox.com/light-level-rooms-d_708.html
 
-## IoT Things:
+# IoT Things:
 
 Ya que tenemos todo nuestra plataforma lista, tenemos que crear los accesos para comunicarnos con ella, asi que tendremos que crear 2 Things en este caso, la primera se para nuestro modulo de RSL10 y la otra sera para la UI de NodeRed.
 
@@ -444,7 +460,7 @@ AWS IoT.
 
 - Ya con esto, tenemos todo el backend en cloud del proyecto, por lo tanto ahora nos podemos concentrar en el frontend.
 
-## Node-Red Setup:
+# Node-Red Setup:
 
 - Node Red is a tool for NodeJS where we can integrate services easily, without code and, of course, create excellent dashboards.
 
@@ -501,8 +517,119 @@ Nota: también mandamos la ubicación a AWS IoT para poder realizar aviso en su 
 
 <img src = "https://i.ibb.co/6v4RVJN/image.png" width = "800">
 
-## Product:
+# NFC Setup: 
 
+Una parte impoortante del utilizar nuetro kit RSL10 es su capacidad de ser un tag NFC, eso no nos abre un mundo de posibilidades para este producto, asi que expandiremos nuestro mercado a cualquier persona que pueda tener un perro, ademas de crear un ecosistema donde, cuando vayas a viajar con tu mascota puedas cuidarla durante el viaje, tambien sera una identificacion intenacional para tu mascota en caso de extravio.
+
+- Esta seccion tiene dos componentes principales, la pagina web de identificacion y la API de notificacion al usuario, las explicaremos a detalle:
+
+## WebPage:
+
+En este caso creamos una pagina web sencilla mediante NodeJS y ReactJS.
+
+https://reactjs.org/docs/getting-started.html
+
+<img src = "https://i.ibb.co/0M5sZ9G/Screenshot-20200318-024208-Chrome.jpg" width = "200">
+
+El código de la pagina web esta en la carpeta de "WebPage".
+
+## API:
+
+### Lambda Creation:
+
+Create a "LocationLambdaPawnON" Lambda Function.
+
+Note: Use your already created SNS ARN.
+
+    // Load the AWS SDK
+      var AWS = require("aws-sdk");
+      // Set up the code to call when the Lambda function is invoked
+      exports.handler = (event, context, callback) => {
+            var sns = new AWS.SNS();
+            var params = {
+            Message: "Your dog's tag was scanned, located at this location: https://www.google.com.mx/maps/@19.42,-99.1663,15z",
+            TopicArn: "arn:aws:sns:us-east-1:YOURSNSTOPIC"
+            };
+            sns.publish(params, context.done);
+    };
+
+### API Creation:
+
+Sign in to the API Gateway console at https://console.aws.amazon.com/apigateway.
+
+If this is API Gateway, you see a page that introduces you to the features of the service. Choose Get Started. When the Create Example API popup appears, choose OK.
+
+If this is not your first time using API Gateway, choose Create API.
+
+Create an empty API as follows:
+- Under Choose the protocol, choose REST.
+- Under Create new API, choose New API.
+- Under Settings:
+  - For API name, enter PawnON-API.
+  - If desired, enter a description in the Description field; otherwise, leave it empty.
+
+<img src = "https://i.ibb.co/71XxZS8/image.png" width = "800">
+
+Leave Endpoint Type set to Regional:
+
+- Choose Create API.
+  - Create the paw-on-api resource as follows:
+  - Choose the root resource (/) in the Resources tree.
+  - Choose Create Resource from the Actions dropdown menu.
+  - Leave Configure as proxy resource unchecked.
+
+- For Resource Name, enter paw-on-api.
+- Leave Resource Path set to /paw-on-api.
+- Leave Enable API Gateway CORS unchecked.
+
+<img src = "https://i.ibb.co/7JH6ZH6/image.png" width = "800">
+
+Choose Create Resource.
+
+In a proxy integration, the entire request is sent to the backend Lambda function as-is, via a catch-all ANY method that represents any HTTP method. The actual HTTP method is specified by the client at run time. The ANY method allows you to use a single API method setup for all of the supported HTTP methods: DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT.
+
+To set up the ANY method, do the following:
+
+- In the Resources list, choose /paw-on-api.
+- In the Actions menu, choose Create method.
+- Choose ANY from the dropdown menu, and choose the checkmark icon
+- Leave the Integration type set to Lambda Function.
+
+<img src = "https://i.ibb.co/fX9NBdQ/image.png" width = "800">
+
+Choose Use Lambda Proxy integration.
+
+- From the Lambda Region dropdown menu, choose the region where you created the GetStartedLambdaProxyIntegration Lambda function.
+- In the Lambda Function field, type any character and choose GetStartedLambdaProxyIntegration from the dropdown menu.
+- Leave Use Default Timeout checked.
+- Choose Save.
+- Choose OK when prompted with Add Permission to Lambda Function.
+
+Deploy and Test the API
+- Deploy the API in the API Gateway console
+- Choose Deploy API from the Actions dropdown menu.
+- For Deployment stage, choose [new stage].
+- For Stage name, enter test.
+- If desired, enter a Stage description.
+- If desired, enter a Deployment description.
+- Choose Deploy.
+- Note the API's Invoke URL.
+
+<img src = "https://i.ibb.co/WxHLh2k/image.png" width = "800">
+
+Checking the API with your invoke URL:
+
+<img src = "https://i.ibb.co/jfbKvHS/Screenshot-20200318-031436-Messages.jpg" width = "300">
+
+## NFC Write Commands:
+
+En este caso para escribir los comandos a ejecutar en el NFC Tag utilice la aplicacion NFC tools para Android.
+
+https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en_US
+
+<img src = "https://i.ibb.co/Wg5VvBy/image.png" width = "300">
+
+# Product:
 
 <img src = "https://i.ibb.co/C2gvKSt/20200317-162807.jpg" width = "800">
 <img src = "https://i.ibb.co/D9pkHvT/20200317-162814.jpg" width = "800">
@@ -518,7 +645,27 @@ My dog with the device:
 <img src = "https://i.ibb.co/26t19qz/20200314-142545.jpg" width = "800">
 <img src = "https://i.ibb.co/7GnSzPw/20200314-142539.jpg" width = "800">
 
-## Demo:
+UI:
+
+http://localhost:1880/ui
+
+<img src = "https://i.ibb.co/bzWytff/image.png" width = "800">
+
+- El mapa de la localización en tiempo real del device es:
+
+http://localhost:1880/worldmap/
+
+<img src = "https://i.ibb.co/ydhWQVs/image.png" width = "800">
+
+UI:
+
+<img src = "https://i.ibb.co/0M5sZ9G/Screenshot-20200318-024208-Chrome.jpg" width = "300">
+
+SMS:
+
+<img src = "https://i.ibb.co/NZ5WXmt/Screenshot-20200318-020153-Messages.jpg" width = "300"><img src = "https://i.ibb.co/jfbKvHS/Screenshot-20200318-031436-Messages.jpg" width = "300">
+
+# Demo:
 
 This my EPIC DEMO:
 
