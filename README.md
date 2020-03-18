@@ -623,11 +623,46 @@ Checking the API with your invoke URL:
 
 ## NFC Write Commands:
 
-En este caso para escribir los comandos a ejecutar en el NFC Tag utilice la aplicacion NFC tools para Android.
+Debido a la falta de documentacion del NFC, mostrare el proceso correcto para escribir comandos en etiquetas de NFC y la simulacion de esos comandos.
+
+### Read the data in the NFC Tag:
+
+Trate de leer la data dentro del tag segun el codigo de ON Semiconductor IDE.
+
+<img src = "https://i.ibb.co/8cRbjnf/image.png" width = "500">
+<img src = "https://i.ibb.co/Bqs70kW/image.png" width = "500">
+
+Segun el codigo deberia poder leer el mensaje "This is just a test".
+
+<img src = "https://i.ibb.co/ZBQfckS/Screenshot-20200318-150816-NFC-Tools-PRO.jpg" width = "400"><img src = "https://i.ibb.co/zfHVM8d/Screenshot-20200318-150811-NFC-Tools-PRO.jpg" width = "400">
+
+En este caso el lector de mi celular, me dice que no es un Tag compatible, sin embargo lo que si pude hacer fue detectarlo como un Tag.
+
+<img src = "https://i.ibb.co/3Mfghxq/Screenshot-20200318-150751-NFC-Tools-PRO.jpg" width = "400">
+
+### Simulate Process:
+
+Ya que podia detectar almenos el tag cree una simulacion con una aplicacion llamada "NFC ReTag" para poder realizar acciones con tags reciclados o que no es posible reescribirlos, en este caso en particular tag no compatible con lectura.
+
+NFC ReTag : https://play.google.com/store/apps/details?id=com.widgapp.NFC_ReTAG_FREE&hl=en_US
+
+<img src = "https://i.ibb.co/DVkQTNR/Screenshot-20200318-150842-NFC-Re-Tag-PRO.png" width = "400"><img src = "https://i.ibb.co/kJ8mpXN/Screenshot-20200318-150833-NFC-Re-Tag-PRO.jpg" width = "400">
+
+Video de como funciona:
+
+[![Demo](https://i.ibb.co/N2kvw0N/yt.png)](https://youtu.be/8_KsMeBGZYY)
+
+### Real Process:
+
+El proceso real para escribir en Tags de NFC es el siguiente, se hara uso de la app NFC Tools, dejo el ejemplo de como funcionaria en una tajeta de NFC reescribible, sin emnbargo cuando sean compatibles estos tags, con los lectores de celular, este seria el proceso correcto.
 
 https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en_US
 
 <img src = "https://i.ibb.co/Wg5VvBy/image.png" width = "300">
+
+Video de como funciona:
+
+[![Demo](https://i.ibb.co/N2kvw0N/yt.png)](https://youtu.be/ShwMbDFksXA)
 
 # Product:
 
