@@ -529,7 +529,7 @@ En este caso creamos una pagina web sencilla mediante NodeJS y ReactJS.
 
 https://reactjs.org/docs/getting-started.html
 
-<img src = "https://i.ibb.co/0M5sZ9G/Screenshot-20200318-024208-Chrome.jpg" width = "200">
+<img src = "https://i.ibb.co/0M5sZ9G/Screenshot-20200318-024208-Chrome.jpg" width = "300">
 
 El código de la pagina web esta en la carpeta de "WebPage".
 
