@@ -524,7 +524,7 @@ This my EPIC DEMO:
 
 Video: Click on the image:
 
-[![Demo](https://i.ibb.co/FwBCNNb/vlcsnap-2020-03-17-15h51m12s755.png)](https://youtu.be/IpRtHPIniXw)
+[![Demo](https://i.ibb.co/FwBCNNb/vlcsnap-2020-03-17-15h51m12s755.png)](https://youtu.be/yn9AhaSX8mg)
 
 Sorry github does not allow embed videos.
 
