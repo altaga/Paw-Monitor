@@ -2,21 +2,19 @@
 
 <img src="https://i.ibb.co/1sMns5D/Logo.png" width="600">
 
-# Introduction
+# Introduction and problem
 
-If you have a dog, cat or any pet that needs to go into a kennel when travelling, and be left in the hands of airlines services, you know how stressful and problematic it is for your precious friends. 
+If you have a dog, cat or any pet that needs to go into a kennel when travelling, and be left in the hands of airlines or moving services, you know how stressful and problematic it is for your precious friends. 
 
-The main problem thus is: The horrid care pets get when they are transported in the aircraft. 
+The main problem thus is: The horrid care pets get when they are transported. 
 
 <img src="https://i.ibb.co/zhMTTGJ/perro.png" width="600">
 
-B2B Market:
+Regarding the pet's safety and comfort:
 
-Sometimes we need to send pets with an airline service for travel to another country. How can we be sure they're fine at all times? Take into consideration how baggage is treated.
+Sometimes we need to send pets with an airline service for travel to another country or just around the corner. How can we be sure they're fine at all times? Take into consideration how baggage is treated.
 
-B2C Market:
-
-Acaso alguna vez no hemos temido que nuestro perro se extravie y no puedas encontrarlo nunca mas, considerariamos tener una solucion para que tu perro nunca pueda perderse.
+And secondly, have we ever feared that our dog goes astray and you can never find it again, the following project might have a solution for that.
 
 Always use technology to improve the world, if you are a black hat or gray hat hacker please abstain at this point ......... or at least leave your star to make me feel less guilty XP.
 
@@ -38,17 +36,17 @@ Always use technology to improve the world, if you are a black hat or gray hat h
 
 <img src="https://animais.culturamix.com/blog/wp-content/gallery/animal-de-estimacao-no-aviao-2/Animal-De-Estima%C3%A7%C3%A3o-No-Aviao-5.jpg" width="1000">
 
-B2B Market:
+Solving for the pet's safety and comfort:
 
 I will make an integral IoT solution to monitor the pet’s environment based on RSL10-SENSE-DB-GEVK, in order to ensure their well-being throughout their journey. All this also integrated with a AWS as backend and NodeRed based platform which, in addition to showing the status of the package in real time, also sends notifications at the frequency that is convenient. 
 
 The current monitoring solutions are restricted to only lifeless packages, this making the continuous monitoring of pets a novelty. It is useful because thanks to this system pet owners can be 100% sure that their pets will be well and can monitor and follow them throughout their flight or any travel.
 
-B2C Market:
+For those lost and gone astray pets:
 
-La tecnologia NFC ha sido usada por muchos años en productos, animales y hasta humanos, sin embargo no tenemos una solucion que nos indique si el perro ya fue encontrado una vez se ha escaneado el tag.
+NFC technology has been used for many years in products, animals and even humans, however we do not have a solution that indicates if the dog has already been found once the tag has been scanned.
 
-Crearemos una configuración del tag de NFC de forma que el perro una vez se le revisen los datos del tag, este nos notifique en donde esta y ademas le muestre a la persona que escaneo el tag la información de contacto para poder recuperar a nuestro mejor amigo.
+We will create a configuration for the NFC tag so that once the tag data is reviewed, it notifies us where it is and also shows the person who scanned the tag, the contact information to recover our best friend. 
 
 
 # Materials:
@@ -92,17 +90,17 @@ Optional Hardware:
 
 - Perfect, your kit is assembled and ready to program!
 
-Para la configuración correcta del kit, sera necesario descargar el IDE oficial de ON Semiconductor.
+For the correct configuration of the kit, it will be necessary to download the official ON Semiconductor IDE.
 
 IDE Link: https://www.onsemi.com/PowerSolutions/gatedDocument.do?method=getGatedDocument&docId=1172113
 
-El manual para configurar correctamente el IDE es el siguiente:
+The manual to correctly configure the IDE is the following:
 
 Link: https://www.onsemi.com/pub/Collateral/EVBUM2614-D.PDF
 
-Todas las dependencias del programa están en la carpeta "Dependencies Pack", puedes descargarlas directamente desde la pagina de ON Semiconductor, pero recomiendo usar las que están en la carpeta.
+All the dependencies of the program are in the "Dependencies Pack" folder, you can download them directly from the ON Semiconductor page, but I recommend using the ones in the folder.
 
-Nota: Toda la configuración del kit esta perfectamente documentada en el documento, asi que este tutorial empezara desde la configuración de la aplicación movil para este proyecto.
+Note: All the configurations for the kit are perfectly documented in the document, so this tutorial will start from the configuration of the mobile application for this project.
 
 # App Setup - Part 1:
  
@@ -116,37 +114,37 @@ iOS:https://apps.apple.com/us/app/rsl10-sense-and-control/id1451974010
 
 Android:https://play.google.com/store/apps/details?id=com.onsemi.rsl10senseandcontrol&hl=es_VE
 
-- Selecciona el dispositivo que vas a configurar.
+- Select the device you are going to configure.
 
 <img src="https://i.ibb.co/kcXVbxx/IMG-0090.png" width="250">
 
-- Seleccionamos los sensores a utilizar.
+- Select your sensors.
 
 <img src="https://i.ibb.co/0FRHJnc/IMG-0066.png" width="250">
 
-- Si todo funciona bien, podremos ver los sensores obteniendo información.
+- If everything works well, we can see the sensors obtaining information.
 
 <img src="https://i.ibb.co/4jzYsKM/IMG-0070.png" width="200"><img src="https://i.ibb.co/ZHXdWcH/IMG-0069.png" width="200"><img src="https://i.ibb.co/R7pjLfM/IMG-0068.png" width="200"><img src="https://i.ibb.co/6Pn7C8k/IMG-0067.png" width="200">
 
-- Una de las principales dificultades para realizar la transmisión por MQTT correctamente, es saber a que Topic se esta mandando toda nuestra información, este Topic sera el mismo para todos los broker que configuremos, sin embargo para obtenerlo, deberemos realizar una pequeña prueba con algún Broker de MQTT que nos permita revisar todos los Topics, en el caso de AWS, no es posible hacer esto, asi que obtendremos el topic mediante un broker local de Mosquitto.
+- One of the main difficulties to carry out the transmission by MQTT correctly, is to know the Topic in which all our information is being sent. This Topic will be the same for all the brokers that we configure, however to obtain it, we must carry out a small test with a Broker MQTT that allows us to review all Topics. In the case of AWS, it is not possible to do this, so we will obtain the topic through a local Mosquitto broker.
 
 Link: https://mosquitto.org/download/
 
-- Para acceder al broker de mosquitto tendremos que configurar el broker en nuestra app.
+- To access the mosquitto broker we will have to configure the broker in our app.
 
-- Entra en el símbolo del engrane en la esquina superior derecha.
+- Tap the gear symbol in the upper right corner.
 
 <img src="https://i.ibb.co/80qj6nV/IMG-00902.png" width="200">
 
-- Presiona el switch "Enable Broadcast" y luego entra en la opción Manage Brokers.
+- Press the "Enable Broadcast" switch and then enter the Manage Brokers option.
 
 <img src="https://i.ibb.co/WFxJYyX/IMG-0071.png" width="200">
 
-- Presionamos el símbolo de + en la esquina superior derecha para agregar el broker.
+- We press the + symbol in the upper right corner to add the broker.
 
 <img src="https://i.ibb.co/4dxwFWb/IMG-0072.png" width="200">
 
-- Configura las credenciales de la siguiente forma.
+- Set up the credentials as follows.
 
   - Client Name: "Any Name"
   - Protocol: tcp
@@ -157,55 +155,55 @@ Link: https://mosquitto.org/download/
 
 <img src="https://i.ibb.co/jV86Lwk/IMG-0095.png" width="200">
 
-- Empieza el broadcast de los datos y en tu computadora ejecuta el siguiente comando en tu CMD or Terminal, para escuchar todos los topics de tu broker y por lo tanto el de tu device.
+- Start the data broadcast on your computer and execute the following command in your CMD or Terminal, to listen to all the topics of your broker and therefore that of your device.
 
-Nota: aveces el broker de mosquitto no se activa de forma automática en windows, les agrego en la carpeta "Scripts" dos archivos .bat que permiten encender y apagar el broker al darles clic, ejecútenlos como administrador.
+Note: sometimes the mosquitto broker is not activated automatically in windows, I added two .bat files in the "Scripts" folder that allows you to turn the broker on and off by clicking them. Run them as administrator.
 
-Nota 2: En la mayoria de los brokers, el simbolo de # se usa como wildcard para los topics.
+Note 2: In most brokers, the # symbol is used as a wildcard for topics.
 
     mosquitto_sub -v -t #
 
-- Tu topic se vera de la siguiente forma.
+- You will see the Topic as follows
 
 <img src="https://i.ibb.co/1nqFHmS/topic.png" width="1000">
 
-Guarda ese topic ya que sera el topic de publicación en todos los brokers.
+Save that topic since it will be the publication topic in all brokers.
 
 # AWS Setup:
 
-AWS funciona a travez de roles, estos roles son credenciales que nosotros creamos para que los servicios se comuniquen entre si, para poder realizar toda nuestra integracion requerimos crear un role que permita la transmision efectiva de todos los servicios, por lo tanto eso sera lo primero a realizar.
+AWS works through roles, these roles are credentials that we create so that the services can communicate with each other, in order to carry out all our integration we need to create a role that allows the effective transmission of all services, therefore that will be the first thing To make.
 
-Nota: siempre empezar por aqui cuando realicemos algun proyecto con AWS.
+Note: always start here when doing a project with AWS.
 
 ## IAM:
 
-- Entramos a la consola de IAM.
+- Enter the IAM console.
 
 <img src="https://i.ibb.co/CHBndXs/image.png" width="1000">
 
-- Entramos en la pestaña de roles y presionamos "Create role".
+- Enter through the role tab and click "Create role".
 
 <img src="https://i.ibb.co/1fm8rhr/image.png" width="1000">
 
-- Creamos un role enfocado en la plataforma IoT.
+- Create a role focused on the IoT platform.
 
 <img src="https://i.ibb.co/42Vv4dY/image.png" width="1000">
 
-- Presionamos Next hasta el review.
+- Press next till review.
 
 <img src="https://i.ibb.co/f22SfJ0/image.png" width="1000">
 
-- Ahora tenemos que agregarle los permisos adicionales al Role, en la pestaña de roles entra al role que acabamos de crear y presiona el boton de Attach policies.
+- Now we have to add the additional permissions to the Role, in the roles tab enter the role we just created and press the Attach policies button.
 
 <img src="https://i.ibb.co/z5kVpXR/image.png" width="1000">
 
-- Dentro de las policies agrega el siguiente:
+- Inside policies add the following:
 
   - AmazonDynamoDBFullAccess
 
 <img src="https://i.ibb.co/7r0KcNJ/image.png" width="1000">
 
-- Una vez terminado eso ahora si podemos empezar la configuración de la Rule dentro de AWS IoT Core.
+- Once that is finished, now we can start configuring the Rule within AWS IoT Core.
 
 ## DynamoDB
 
