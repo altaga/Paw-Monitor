@@ -207,104 +207,104 @@ Note: always start here when doing a project with AWS.
 
 ## DynamoDB
 
-En este caso la configuración de AWS IoT ya es proporcionada por la documentación oficial de ON semiconductor, sin embargo yo les mostrare como configurar las Rules para conectar el resto de servicios de AWS.
+In this case the AWS IoT configuration is already provided by the official documentation by ON semiconductor, however I will show you how to configure the Rules to connect the rest of AWS services.
 
 Link: https://www.onsemi.com/pub/Collateral/AND9831-D.PDF
 
-- Una vez recibamos los datos a nuestro AWS IoT Core, configuraremos las Rules para conectar los siguientes servicios.
+- Once we receive the data to our AWS IoT Core, we will configure the Rules to connect the following services.
 
 <img src="https://i.ibb.co/zhzZXGh/Create.png" width="1000">
 
-- Le colocamos cualquier nombre a la rule.
+- Set any name for the Rule.
 
 <img src="https://i.ibb.co/Rj05MW5/image.png" width="1000">
 
-- En el SQL Query colocaremos nuestro topic.
+- In the SQL Query we will place our topic.
 
 <img src="https://i.ibb.co/R6Yqh0V/image.png" width="1000">
 
-- La primera rule que vamos a crear sera para guardar todos los datos en una DynamoDB.
+- The first rule we are going to create will be to save all the data in a DynamoDB.
 
 <img src="https://i.ibb.co/nRm3WNy/image.png" width="1000">
 
-- Presionamos "Create a new resource" para crear la tabla donde guardaremos los datos.
+- Press "Create a new resource" to create the table where we will save the data.
 
 <img src="https://i.ibb.co/Hn4TYS2/image.png" width="1000">
 
-- Para nuestra tabla usaremos los siguientes parámetros, sugiero que uses específicamente estos, ya que en nivel de producción todos los números de device serán diferentes y en la columna "Time" vamos a implementar una función especial de TIMESTAMP.
+- For our table we will use the following parameters, I suggest that you use these specifically, since at production level all the device numbers will be different and in the "Time" column we are going to implement a special TIMESTAMP function.
 
 <img src="https://i.ibb.co/ZWR8GcG/image.png" width="1000">
 
-- Una vez creado el recurso regresamos a 
+- Once the resource is created we return to:
 
 <img src="https://i.ibb.co/YtjVBjd/image.png" width="1000">
 
-La función especial en Sort Key value es:
+The Sort Key value special function is:
 
     ${parse_time("yyyy.MM.dd G 'at' HH:mm:ss z", timestamp() )}
 
-- Una vez este terminado eso, habremos terminado la primera rule, en este caso debido a que la rule para la lambda utiliza un SQL query diferente, ya no añaderemos mas acciones a esta rule.
+- Once this is finished, we will have finished the first rule. In this case, because the rule for the lambda uses a different SQL query, we will no longer add any more actions to this rule.
 
 ## Lambda:
 
-- Para crearemos una nueva rule pero utilizando el siguiente SQL Query.
+- To create a new rule but using the following SQL Query.
 
 <img src="https://i.ibb.co/Np6R5GQ/image.png" width="1000">
 
-- Añadiremos a esta rule la siguiente acción:
+- We will add to this rule the following action:
 
 <img src="https://i.ibb.co/n3H5576/image.png" width="1000">
 
-- Presionamos el botón de "Create a new Lambda Function":
+- Press the "Create a new Lambda Function" button:
 
 <img src="https://i.ibb.co/5sLHqy2/image.png" width="1000">
 
-- Configuramos la lambda de la siguiente forma y la creamos:
+- We configure the lambda in the following way and create it:
 
 <img src="https://i.ibb.co/68j2BXJ/image.png" width="1000">
 
-- Una vez creada la lambda bajamos a la seccion de Execution role y presionamos el boton View the YOURROLE on the IAM console para poder agregar la police de SNS para los SMS:
+- Once the lambda has been created we go down to the Execution role section and press the View the YOURROLE button on the IAM console to be able to add the SNS police to the SMS:
 
 <img src="https://i.ibb.co/K9QRFc4/image.png" width="1000">
 
-- Agreamos el servicio de SNS   
+- We add the SNS service  
     - AmazonSNSFullAccess 
 
 <img src="https://i.ibb.co/xJV8jxX/image.png" width="1000">
 
-- Una ves terminado eso, seleccionamos la lambda en nuestra rule para terminar de configurar el trigger de la lambda.
+- Once that is finished, we select the lambda in our rule to finish configuring the lambda trigger.
 
 <img src="https://i.ibb.co/zh8Fq0C/image.png" width="1000">
 
-- Antes de programar la Lambda tendremos que configurar el servicio de SMS a traves de SNS.
+- Before programming the Lambda we will have to configure the SMS service through SNS.
 
 <img src="https://i.ibb.co/RbjHG8c/image.png" width="1000">
 
-- Presionamos el boton de "Create Topic" para crear nuestro servicio de mensajes.
+- Press the "Create Topic" button to create our message service.
 
 <img src="https://i.ibb.co/fNhCPfh/image.png" width="1000">
 
-- Ponerle titulo al Topic y crearlo.
+- Give the Topic a title and create it.
 
 <img src="https://i.ibb.co/YDZXHC5/image.png" width="1000">
 
-- Guarda el numero de ARN, ya que lo vamos a necesitar para configurar la lambda.
+- Save the ARN number, since we are going to need it to configure the lambda.
 
 <img src="https://i.ibb.co/NpBxLj1/image.png" width="1000">
 
-- Presionamos el botón de "Create subscription".
+- Click "Create subscription".
 
 <img src="https://i.ibb.co/bvdLmBW/image.png" width="1000">
 
-- Seleccionamos como "Protocol" SMS y en Endpoint pon tu numero de celular (Marcacion internacional).
+- Select as "Protocol" SMS and in Endpoint put your cell number (International dialing).
 
 <img src="https://i.ibb.co/Kw1F5SW/image.png" width="1000">
 
-- Listo hemos terminado de crear los servicios necesarios para utilizar la lambda correctamente, ahora regresamos a la lambda y copia el código en la carpeta Lambda Code y pegalo en tu Lambda.
+- Done, we have finished creating the necessary services to use the lambda correctly, now we return to the lambda and copy the code in the Lambda Code folder and paste it into your Lambda.
 
 <img src="https://i.ibb.co/FztvcY8/image.png" width="1000">
 
-- La parte mas importante del coodigo son los Thresholds, cada uno de ellos se obtuvo de las siguientes referencias.
+- The most important part of the code is the Thresholds, each of them was obtained from the following references.
 
 - Air Quality: RSL10 Reference.
 - Max Accel Limit: https://web.archive.org/web/20170104164718/http://www.au.af.mil/au/aupress/digital/pdf/book/b_0113_brulle_engineering_space_age.pdf
@@ -316,13 +316,13 @@ La función especial en Sort Key value es:
 
 # IoT Things:
 
-Ya que tenemos todo nuestra plataforma lista, tenemos que crear los accesos para comunicarnos con ella, asi que tendremos que crear 2 Things en este caso, la primera se para nuestro modulo de RSL10 y la otra sera para la UI de NodeRed.
+Since we have all our platform ready, we have to create the accesses to communicate with it. So we will have to create two Things in this case, the first is for our RSL10 module and the other will be for the NodeRed UI.
 
-Nota: Para configurar la app, puedes usar el siguiente manual oficial de ON Semiconductor también.
+Note: To configure the app, you can use the following official ON Semiconductor manual as well.
 
 Link: https://www.onsemi.com/pub/Collateral/AND9831-D.PDF
 
-- First we have ti access our AWS console y look for the IoT core service:
+- First we have to access our AWS console y look for the IoT core service:
 
 <img src="https://i.ibb.co/KVbtQLR/image.png" width="600">
 
@@ -338,15 +338,15 @@ Link: https://www.onsemi.com/pub/Collateral/AND9831-D.PDF
 
 <img src="https://i.ibb.co/XSxSxbF/image.png" width="600">
 
-- In "Choose a platform" select "Linux/OSX", in AWS IoT DEvice SDK select "Python" and then click "Next".
+- At "Choose a platform" select "Linux/OSX", in AWS IoT DEvice SDK select "Python" and then click "Next".
 
 <img src="https://i.ibb.co/JR69Fdd/image.png" width="600">
 
-- In Name write any name,remember this process you will do it twice, so name things so that you can differentiate the credentials that you will put in NodeRed and in the RSL10 app, you'd like and then click on "Next step".
+- At Name, write any name, remember that you will have to do this process twice, so name things ion order that you can differentiate the credentials that you will put in NodeRed and in the RSL10 app. Then click on "Next step".
 
 <img src="https://i.ibb.co/NNLqqM0/image.png" width="600">
 
-- In the section, "Download connection kit for" press the button "Linux/OSX" to download the credential package (which we will use later) and click on "Next Step".
+- At "Download connection kit for" press the button "Linux/OSX" to download the credential package (which we will use later) and click on "Next Step".
 
 <img src="https://i.ibb.co/RHVTRpg/image.png" width="600">
 
@@ -358,11 +358,11 @@ Link: https://www.onsemi.com/pub/Collateral/AND9831-D.PDF
 
 <img src="https://i.ibb.co/DtBxq0k/image.png" width="600">
 
-- In the lateral bar, inside the Manage/Things section we can see our thing already created. Now we have to set up the policy of that thing for it to work without restrictions in AWS.
+- On the lateral bar, inside the Manage/Things section we can see our thing already created. Now we have to set up the policy of that thing for it to work without restrictions in AWS.
 
 <img src="https://i.ibb.co/dQTFLZY/image.png" width="600">
 
-- In the lateral bar, in the Secure/Policies section we can see our thing-policy, click on it to modify it:
+- At the lateral bar, in the Secure/Policies section we can see our thing-policy, click on it to modify it:
 
 <img src="https://i.ibb.co/jThNgtc/image.png" width="600">
 
@@ -385,29 +385,29 @@ Copy-paste the following text in the document and save it.
 
 <img src="https://i.ibb.co/ydtTqB2/image.png" width="600">
 
-- Once this is done, we will go to our pc and to the folder with the credentials previously downloaded and extract them.
+- Once this is done, we will go to our pc and to the folder with the credentials previously downloaded, extract them.
 
 <img src="https://i.ibb.co/mFKPxcY/image.png" width="600">
 
 ## App Setup - Part 2:
 
-Android: si estas configurando AWS en un Android, pasa mediante USB los certificados para que puedas configurarlos fácilmente.
+Android: if you are configuring AWS on an Android, send the certificates through USB so you can easily configure them.
 
-iPhone: si estas configurando AWS en un iPhone, lo mas sencillo es poner los certificados desde https://www.icloud.com/# en la aplicación de "iCloud Drive".
+iPhone: If you are configuring AWS on an iPhone, the easiest way is to put the certificates from https://www.icloud.com/# in the "iCloud Drive" application.
 
 <img src="https://i.ibb.co/CJg26xW/image.png" width="1000">
 
-Ya que tenemos los certificados para el device lo configuraremos de la siguiente forma.
+Since we have the certificates for the device, we will configure it as follows.
 
-- Entra en el símbolo del engrane en la esquina superior derecha.
+- Enter the gear symbol in the upper right corner.
 
 <img src="https://i.ibb.co/80qj6nV/IMG-00902.png" width="200">
 
-- Presiona el switch "Enable Broadcast" y luego entra en la opción Manage Brokers.
+- Press the "Enable Broadcast" switch and then enter the Manage Brokers option.
 
 <img src="https://i.ibb.co/WFxJYyX/IMG-0071.png" width="200">
 
-- Presionamos el símbolo de + en la esquina superior derecha para agregar el broker.
+- Press the + symbol in the upper right corner to add the broker.
 
 <img src="https://i.ibb.co/4dxwFWb/IMG-0072.png" width="200">
 
@@ -440,13 +440,13 @@ Ya que tenemos los certificados para el device lo configuraremos de la siguiente
 
     <img src="https://i.ibb.co/4gWLrNw/IMG-0078.png" width="200">
 
-- Presiona "Save" en la esquina superior derecha para completar la configuración.
- 
-- Para empezar el broadcast hacia AWS presiona en la aplicación el siguiente botón.
+- Press "Save" in the upper right corner to complete the setup.
+ 
+- To start broadcasting to AWS, press the following button in the application.
 
 <img src="https://i.ibb.co/GpWvN9m/IMG-0091.png" width="200">
 
-- Si todo sale bien, deberemos ver en AWS IoT y DynamoDB lo Siguiente.
+- If everything goes well, we should see the following in AWS IoT and DynamoDB.
 
 DynamoDB.
 
@@ -456,7 +456,7 @@ AWS IoT.
 
  <img src="https://i.ibb.co/xC7M9cX/image.png" width="1000">
 
-- Ya con esto, tenemos todo el backend en cloud del proyecto, por lo tanto ahora nos podemos concentrar en el frontend.
+- With this, we have the entire cloud backend of the project, so now we can focus on the frontend.
 
 # Node-Red Setup:
 
@@ -493,43 +493,43 @@ http://localhost:1880/ui
 
 <img src = "https://i.ibb.co/bzWytff/image.png" width = "800">
 
-- El mapa de la localización en tiempo real del device es:
+- The device's real-time location map is at:
 
 http://localhost:1880/worldmap/
 
 <img src = "https://i.ibb.co/ydhWQVs/image.png" width = "800">
 
-### Blocks Explanation:
+### Explanation for some nodes:
 
-- Este bloque realiza la función de actualizar cada 10 segundos la ubicación en el mapa, la ubicación la obtiene al llamar una API de localización gratuita, procesando con una función (escrita en Javascript) y mandándola al nodo de mapa.
+- This node performs the function of updating the location on the map every 10 seconds, the location is obtained by calling a free location API, processing with a function (written in Javascript) and sending it to the map node.
 
-Nota: también mandamos la ubicación a AWS IoT para poder realizar aviso en su debido caso si la ubicación del animal cambia de forma repentina.
+Note: We also send the location to AWS IoT so that we can notify you if the pet's location changes suddenly.
 
 <img src = "https://i.ibb.co/58dhD0n/image.png" width = "800">
 
-- Este bloque recibe cada uno de los payloads de el broker, filtra según el sensor a que gráfica tiene que ir y lo manda a gráficar.
+- This node receives each of the broker's payloads, filters according to the sensor which graph it has to go to and sends it to graph.
 
 <img src = "https://i.ibb.co/YLzYM9F/image.png" width = "800">
 
-- Este bloque es uno de los mas interesantes ya que su funcion es espera a que el dato de temperatura y humedad lleguen para poder hacer el calculo del Dew Point, que es uno de los estándares para la medición del confort en el ambiente.
+- This Node is one of the most interesting since its function is to wait for the temperature and humidity data to arrive in order to calculate the Dew Point, which is one of the standards for measuring comfort in the environment.
 
 <img src = "https://i.ibb.co/6v4RVJN/image.png" width = "800">
 
 # NFC Setup: 
 
-Una parte impoortante del utilizar nuetro kit RSL10 es su capacidad de ser un tag NFC, eso no nos abre un mundo de posibilidades para este producto, asi que expandiremos nuestro mercado a cualquier persona que pueda tener un perro, ademas de crear un ecosistema donde, cuando vayas a viajar con tu mascota puedas cuidarla durante el viaje, tambien sera una identificacion intenacional para tu mascota en caso de extravio.
+An important part of using our RSL10 kit is its ability to be an NFC tag. That opens up a world of possibilities for this product, so we may expand our market to anyone who has a dog. In addition to creating an ecosystem where, when you travel with your pet you can take care of it during the trip, it will also be an international ID for your pet in case it goes astray.
 
-- Esta seccion tiene dos componentes principales, la pagina web de identificacion y la API de notificacion al usuario, las explicaremos a detalle:
+- This section has two main components, the identification web page and the API for user notification. We will explain them in detail:
 
 ## WebPage:
 
-En este caso creamos una pagina web sencilla mediante NodeJS y ReactJS.
+For this we create a simple web page using NodeJS and ReactJS.
 
 https://reactjs.org/docs/getting-started.html
 
 <img src = "https://i.ibb.co/0M5sZ9G/Screenshot-20200318-024208-Chrome.jpg" width = "300">
 
-El código de la pagina web esta en la carpeta de "WebPage".
+The code of the web page is in the "WebPage" folder.
 
 ## API:
 
@@ -555,7 +555,7 @@ Note: Use your already created SNS ARN.
 
 Sign in to the API Gateway console at https://console.aws.amazon.com/apigateway.
 
-If this is API Gateway, you see a page that introduces you to the features of the service. Choose Get Started. When the Create Example API popup appears, choose OK.
+In this API Gateway, you see a page that introduces you to the features of the service. Choose Get Started. When the Create Example API popup appears, choose OK.
 
 If this is not your first time using API Gateway, choose Create API.
 
@@ -621,44 +621,44 @@ Checking the API with your invoke URL:
 
 ## NFC Write Commands:
 
-Debido a la falta de documentacion del NFC, mostrare el proceso correcto para escribir comandos en etiquetas de NFC y la simulacion de esos comandos.
+Due to the lack of NFC documentation, I will show the correct process for writing commands to NFC tags and simulating those commands.
 
 ### Read the data in the NFC Tag:
 
-Trate de leer la data dentro del tag segun el codigo de ON Semiconductor IDE.
+Try to read the data inside the tag according to the ON Semiconductor IDE code.
 
 <img src = "https://i.ibb.co/8cRbjnf/image.png" width = "500">
 <img src = "https://i.ibb.co/Bqs70kW/image.png" width = "500">
 
-Segun el codigo deberia poder leer el mensaje "This is just a test".
+According to the code you should be able to read the message "This is just a test".
 
 <img src = "https://i.ibb.co/ZBQfckS/Screenshot-20200318-150816-NFC-Tools-PRO.jpg" width = "400"><img src = "https://i.ibb.co/zfHVM8d/Screenshot-20200318-150811-NFC-Tools-PRO.jpg" width = "400">
 
-En este caso el lector de mi celular, me dice que no es un Tag compatible, sin embargo lo que si pude hacer fue detectarlo como un Tag.
+In this case the reader of my cell phone tells me that it is not a compatible Tag, however what I could do was detect it as a Tag.
 
 <img src = "https://i.ibb.co/3Mfghxq/Screenshot-20200318-150751-NFC-Tools-PRO.jpg" width = "400">
 
 ### Simulate Process:
 
-Ya que podia detectar almenos el tag cree una simulacion con una aplicacion llamada "NFC ReTag" para poder realizar acciones con tags reciclados o que no es posible reescribirlos, en este caso en particular tag no compatible con lectura.
+Since it could detect at least the tag, I created a simulation with an application called "NFC ReTag" to be able to perform actions with recycled tags or when it is not possible to rewrite them, in this case in particular a tag not compatible with reading.
 
 NFC ReTag : https://play.google.com/store/apps/details?id=com.widgapp.NFC_ReTAG_FREE&hl=en_US
 
 <img src = "https://i.ibb.co/DVkQTNR/Screenshot-20200318-150842-NFC-Re-Tag-PRO.png" width = "400"><img src = "https://i.ibb.co/kJ8mpXN/Screenshot-20200318-150833-NFC-Re-Tag-PRO.jpg" width = "400">
 
-Video de como funciona:
+Video of how it works:
 
 [![Demo](https://i.ibb.co/N2kvw0N/yt.png)](https://youtu.be/8_KsMeBGZYY)
 
 ### Real Process:
 
-El proceso real para escribir en Tags de NFC es el siguiente, se hara uso de la app NFC Tools, dejo el ejemplo de como funcionaria en una tajeta de NFC reescribible, sin emnbargo cuando sean compatibles estos tags, con los lectores de celular, este seria el proceso correcto.
+The real process to write on NFC tags is the following one. We will make use of the NFC tools app, here I leave the example of how it works on a rewritable NFC tag, nevertheless when these tags are compatible with cellphone readers, this would be the process.
 
 https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en_US
 
 <img src = "https://i.ibb.co/Wg5VvBy/image.png" width = "300">
 
-Video de como funciona:
+Video of how it works:
 
 [![Demo](https://i.ibb.co/N2kvw0N/yt.png)](https://youtu.be/ShwMbDFksXA)
 
@@ -684,7 +684,7 @@ http://localhost:1880/ui
 
 <img src = "https://i.ibb.co/bzWytff/image.png" width = "800">
 
-- El mapa de la localización en tiempo real del device es:
+- The device's real-time location map is:
 
 http://localhost:1880/worldmap/
 
@@ -700,7 +700,7 @@ SMS:
 
 # Demo:
 
-This my EPIC DEMO:
+This my DEMO:
 
 Video: Click on the image:
 
