@@ -638,7 +638,7 @@ In this case the reader of my cell phone tells me that it is not a compatible Ta
 
 <img src = "https://i.ibb.co/3Mfghxq/Screenshot-20200318-150751-NFC-Tools-PRO.jpg" width = "400">
 
-### Simulate Process:
+### Simulated Process:
 
 Since it could detect at least the tag, I created a simulation with an application called "NFC ReTag" to be able to perform actions with recycled tags or when it is not possible to rewrite them, in this case in particular a tag not compatible with reading.
 
