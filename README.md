@@ -1,6 +1,6 @@
 # Pawn-Monitor
 
-<img src="https://i.ibb.co/1sMns5D/Logo.png" width="600">
+<img src="https://i.ibb.co/QnL5p1y/Logomod.png" width="600">
 
 # Introduction and problem
 
@@ -237,7 +237,7 @@ Link: https://www.onsemi.com/pub/Collateral/AND9831-D.PDF
 
 - Once the resource is created we return to:
 
-<img src="https://i.ibb.co/YtjVBjd/image.png" width="1000">
+<img src="https://i.ibb.co/qWTw8Kx/image.png" width="1000">
 
 The Sort Key value special function is:
 
@@ -420,7 +420,7 @@ Since we have the certificates for the device, we will configure it as follows.
   - Port Number: 8883 (443 doesn't work)
   - Username and Password: Empty
 
-<img src="https://i.ibb.co/55nJRcM/IMG-0073.png" width="200">
+<img src="https://i.ibb.co/n03m8Gd/image.png" width="200">
 
 -  Import all the certificates (CA certificate inside "Cert" folder)
 
@@ -450,7 +450,7 @@ Since we have the certificates for the device, we will configure it as follows.
 
 DynamoDB.
 
- <img src="https://i.ibb.co/kB711xp/image.png" width="1000">
+ <img src="https://i.ibb.co/ZVSRtgF/image.png" width="1000">
 
 AWS IoT.
 
@@ -527,7 +527,7 @@ For this we create a simple web page using NodeJS and ReactJS.
 
 https://reactjs.org/docs/getting-started.html
 
-<img src = "https://i.ibb.co/0M5sZ9G/Screenshot-20200318-024208-Chrome.jpg" width = "300">
+<img src = "https://i.ibb.co/hggCF05/image.png" width = "300">
 
 The code of the web page is in the "WebPage" folder.
 
@@ -535,7 +535,7 @@ The code of the web page is in the "WebPage" folder.
 
 ### Lambda Creation:
 
-Create a "LocationLambdaPawnON" Lambda Function.
+Create a "LocationLambdaPawnMonitor" Lambda Function.
 
 Note: Use your already created SNS ARN.
 
@@ -563,24 +563,24 @@ Create an empty API as follows:
 - Under Choose the protocol, choose REST.
 - Under Create new API, choose New API.
 - Under Settings:
-  - For API name, enter PawnON-API.
+  - For API name, enter PawnMonitor-API.
   - If desired, enter a description in the Description field; otherwise, leave it empty.
 
-<img src = "https://i.ibb.co/71XxZS8/image.png" width = "800">
+<img src = "https://i.ibb.co/yRYqzD9/image.png" width = "800">
 
 Leave Endpoint Type set to Regional:
 
 - Choose Create API.
-  - Create the paw-on-api resource as follows:
+  - Create the pawn-monitor-api resource as follows:
   - Choose the root resource (/) in the Resources tree.
   - Choose Create Resource from the Actions dropdown menu.
   - Leave Configure as proxy resource unchecked.
 
-- For Resource Name, enter paw-on-api.
-- Leave Resource Path set to /paw-on-api.
+- For Resource Name, enter pawn-monitor.
+- Leave Resource Path set to /pawn-monitor.
 - Leave Enable API Gateway CORS unchecked.
 
-<img src = "https://i.ibb.co/7JH6ZH6/image.png" width = "800">
+<img src = "https://i.ibb.co/ns5570X/image.png" width = "800">
 
 Choose Create Resource.
 
@@ -588,12 +588,12 @@ In a proxy integration, the entire request is sent to the backend Lambda functio
 
 To set up the ANY method, do the following:
 
-- In the Resources list, choose /paw-on-api.
+- In the Resources list, choose /pawn-monitor-api.
 - In the Actions menu, choose Create method.
 - Choose ANY from the dropdown menu, and choose the checkmark icon
 - Leave the Integration type set to Lambda Function.
 
-<img src = "https://i.ibb.co/fX9NBdQ/image.png" width = "800">
+<img src = "https://i.ibb.co/vVdQ9hq/image.png" width = "800">
 
 Choose Use Lambda Proxy integration.
 
@@ -613,11 +613,11 @@ Deploy and Test the API
 - Choose Deploy.
 - Note the API's Invoke URL.
 
-<img src = "https://i.ibb.co/WxHLh2k/image.png" width = "800">
+<img src = "https://i.ibb.co/ZK3g3nk/image.png" width = "800">
 
 Checking the API with your invoke URL:
 
-<img src = "https://i.ibb.co/jfbKvHS/Screenshot-20200318-031436-Messages.jpg" width = "300">
+<img src = "https://i.ibb.co/LP46ZbD/image.png" width = "300">
 
 ## NFC Write Commands:
 
@@ -644,11 +644,11 @@ Since it could detect at least the tag, I created a simulation with an applicati
 
 NFC ReTag : https://play.google.com/store/apps/details?id=com.widgapp.NFC_ReTAG_FREE&hl=en_US
 
-<img src = "https://i.ibb.co/DVkQTNR/Screenshot-20200318-150842-NFC-Re-Tag-PRO.png" width = "400"><img src = "https://i.ibb.co/kJ8mpXN/Screenshot-20200318-150833-NFC-Re-Tag-PRO.jpg" width = "400">
+<img src = "https://i.ibb.co/DVkQTNR/Screenshot-20200318-150842-NFC-Re-Tag-PRO.png" width = "400"><img src = "https://i.ibb.co/MRSVkQb/image.png" width = "400">
 
 Video of how it works:
 
-[![Demo](https://i.ibb.co/N2kvw0N/yt.png)](https://youtu.be/8_KsMeBGZYY)
+[![Demo](https://i.ibb.co/QnL5p1y/Logomod.png)](https://youtu.be/8_KsMeBGZYY)
 
 ### Real Process:
 
@@ -660,7 +660,7 @@ https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en_US
 
 Video of how it works:
 
-[![Demo](https://i.ibb.co/N2kvw0N/yt.png)](https://youtu.be/ShwMbDFksXA)
+[![Demo](https://i.ibb.co/QnL5p1y/Logomod.png)](https://youtu.be/ShwMbDFksXA)
 
 # Product:
 
@@ -692,11 +692,11 @@ http://localhost:1880/worldmap/
 
 UI:
 
-<img src = "https://i.ibb.co/0M5sZ9G/Screenshot-20200318-024208-Chrome.jpg" width = "300">
+<img src = "https://i.ibb.co/hggCF05/image.png" width = "300">
 
 SMS:
 
-<img src = "https://i.ibb.co/NZ5WXmt/Screenshot-20200318-020153-Messages.jpg" width = "300"><img src = "https://i.ibb.co/jfbKvHS/Screenshot-20200318-031436-Messages.jpg" width = "300">
+<img src = "https://i.ibb.co/LP46ZbD/image.png" width = "300">
 
 # Demo:
 
@@ -704,7 +704,7 @@ This my DEMO:
 
 Video: Click on the image:
 
-[![Demo](https://i.ibb.co/q1LQZgx/yt2.png)](https://youtu.be/yn9AhaSX8mg)
+[![Demo](https://i.ibb.co/B3nNKrq/Logo-new.png)](https://youtu.be/ayNcHDSBGdA)
 
 Sorry github does not allow embed videos.
 
