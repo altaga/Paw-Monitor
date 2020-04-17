@@ -648,7 +648,7 @@ NFC ReTag : https://play.google.com/store/apps/details?id=com.widgapp.NFC_ReTAG_
 
 Video of how it works:
 
-[![Demo](https://i.ibb.co/QnL5p1y/Logomod.png)](https://youtu.be/8_KsMeBGZYY)
+[![Demo](https://i.ibb.co/QnL5p1y/Logomod.png)](https://youtu.be/x2RohW8srRM)
 
 ### Real Process:
 
@@ -660,7 +660,7 @@ https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en_US
 
 Video of how it works:
 
-[![Demo](https://i.ibb.co/QnL5p1y/Logomod.png)](https://youtu.be/ShwMbDFksXA)
+[![Demo](https://i.ibb.co/QnL5p1y/Logomod.png)](https://youtu.be/BOCRgQJVt6U)
 
 # Product:
 
