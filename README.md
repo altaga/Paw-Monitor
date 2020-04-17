@@ -1,4 +1,4 @@
-# Pawn-Monitor
+# Paw-Monitor
 
 <img src="https://i.ibb.co/QnL5p1y/Logomod.png" width="600">
 
@@ -535,7 +535,7 @@ The code of the web page is in the "WebPage" folder.
 
 ### Lambda Creation:
 
-Create a "LocationLambdaPawnMonitor" Lambda Function.
+Create a "LocationLambdaPawMonitor" Lambda Function.
 
 Note: Use your already created SNS ARN.
 
@@ -563,7 +563,7 @@ Create an empty API as follows:
 - Under Choose the protocol, choose REST.
 - Under Create new API, choose New API.
 - Under Settings:
-  - For API name, enter PawnMonitor-API.
+  - For API name, enter PawMonitor-API.
   - If desired, enter a description in the Description field; otherwise, leave it empty.
 
 <img src = "https://i.ibb.co/yRYqzD9/image.png" width = "800">
@@ -571,13 +571,13 @@ Create an empty API as follows:
 Leave Endpoint Type set to Regional:
 
 - Choose Create API.
-  - Create the pawn-monitor-api resource as follows:
+  - Create the paw-monitor-api resource as follows:
   - Choose the root resource (/) in the Resources tree.
   - Choose Create Resource from the Actions dropdown menu.
   - Leave Configure as proxy resource unchecked.
 
-- For Resource Name, enter pawn-monitor.
-- Leave Resource Path set to /pawn-monitor.
+- For Resource Name, enter paw-monitor.
+- Leave Resource Path set to /paw-monitor.
 - Leave Enable API Gateway CORS unchecked.
 
 <img src = "https://i.ibb.co/ns5570X/image.png" width = "800">
@@ -588,7 +588,7 @@ In a proxy integration, the entire request is sent to the backend Lambda functio
 
 To set up the ANY method, do the following:
 
-- In the Resources list, choose /pawn-monitor-api.
+- In the Resources list, choose /paw-monitor-api.
 - In the Actions menu, choose Create method.
 - Choose ANY from the dropdown menu, and choose the checkmark icon
 - Leave the Integration type set to Lambda Function.
